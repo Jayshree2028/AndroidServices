@@ -1,0 +1,46 @@
+ FATAL EXCEPTION: main
+Process: com.example.servicesexample, PID: 13300
+java.lang.RuntimeException: Unable to start activity ComponentInfo{com.example.servicesexample/com.example.servicesexample.MainActivity}: java.lang.IllegalStateException: Not allowed to start service Intent { cmp=com.example.servicesexample/.Background.BackgroundService }: app is in background uid UidRecord{463cd0a u0a189 TPSL idle procs:1 seq(0,0,0)}
+	at android.app.ActivityThread.performLaunchActivity(ActivityThread.java:2952)
+	at android.app.ActivityThread.handleLaunchActivity(ActivityThread.java:3087)
+	at android.app.servertransaction.LaunchActivityItem.execute(LaunchActivityItem.java:78)
+	at android.app.servertransaction.TransactionExecutor.executeCallbacks(TransactionExecutor.java:108)
+	at android.app.servertransaction.TransactionExecutor.execute(TransactionExecutor.java:68)
+	at android.app.ActivityThread$H.handleMessage(ActivityThread.java:1817)
+	at android.os.Handler.dispatchMessage(Handler.java:106)
+	at android.os.Looper.loop(Looper.java:193)
+	at android.app.ActivityThread.main(ActivityThread.java:6746)
+	at java.lang.reflect.Method.invoke(Native Method)
+	at com.android.internal.os.RuntimeInit$MethodAndArgsCaller.run(RuntimeInit.java:493)
+	at com.android.internal.os.ZygoteInit.main(ZygoteInit.java:858)
+
+
+	//////////////////////
+	The error message you're encountering is indicating that your app is trying to start a service (BackgroundService) in an incorrect context, possibly because the service is being started in a restricted way on newer versions of Android. Starting services in the background is subject to certain restrictions on Android 8.0 (API level 26) and higher.
+
+    The Cause:
+    Since Android 8.0 (API level 26), there are restrictions on starting background services. If your BackgroundService is being started from an activity that is in the background or it's not being started properly, Android will prevent it from running, and you'll see this error.
+
+    The Solution:
+    Ensure you're starting the service from the foreground activity: If you're starting the service from a background activity, ensure that the activity is in the foreground.
+
+    Use JobIntentService or JobScheduler for background tasks: If you want to perform background tasks, you should use JobIntentService or JobScheduler for tasks that are supposed to run in the background.
+
+    For Android 8.0 and above: Starting services in the background has become restricted. You'll need to use JobIntentService or JobScheduler to handle background tasks properly on these devices.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
