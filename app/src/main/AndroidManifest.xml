@@ -1,6 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools">
+    <uses-permission android:name="android.permission.FOREGROUND_SERVICE"/>
+    <uses-permission android:name="android.permission.FOREGROUND_SERVICE_DATA_SYNC"/>
+        <uses-permission android:name="android.permission.POST_NOTIFICATIONS"/>
+
+
 
     <application
         android:allowBackup="true"
@@ -21,7 +26,20 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <service android:name=".Background.BackgroundService"></service>
+        <service
+            android:name=".ForegroundService"
+            android:foregroundServiceType="dataSync"
+            android:enabled="true"
+            android:exported="false"></service>
+
+<!--        <service android:name=".Background.BackgroundService"></service>-->
+<!--        <service-->
+<!--            android:name=".LoggerService"-->
+<!--            android:enabled="true"-->
+<!--            android:exported="false"></service>-->
+        <!--         android:exported="false"-->
+        <!--        can you use sevice for another aap
+        is another app can interact with this service-->
     </application>
 
 </manifest>
